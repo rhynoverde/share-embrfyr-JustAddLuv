@@ -56,7 +56,7 @@ button {
     background-color: #822E08; /* Updated button color */
     color: white;
     padding: 18px 24px; /* Increased padding for larger button size */
-    font-size: 18px; /* Increased font size */
+    font-size: 35px; /* Increased font size */
     font-weight: bold; /* Bolder text */
     cursor: pointer;
     border-radius: 6px; /* Slightly larger border radius */
