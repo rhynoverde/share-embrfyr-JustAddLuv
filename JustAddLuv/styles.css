@@ -53,19 +53,19 @@ p {
 }
 
 button {
-    background-color: #822E08; /* Updated button color */
+    background-color: #822E08; /* Button color */
     color: white;
-    padding: 18px 24px; /* Increased padding for larger button size */
-    font-size: 35px; /* Increased font size */
+    padding: 36px 48px; /* Doubled padding for larger button size */
+    font-size: 36px; /* Doubled font size */
     font-weight: bold; /* Bolder text */
     cursor: pointer;
-    border-radius: 6px; /* Slightly larger border radius */
+    border-radius: 12px; /* Slightly larger border radius */
     border: none;
     transition: background-color 0.3s ease;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin-top: 10px; /* Add space above the button */
+    margin-top: 20px; /* Increased space above the button */
 }
 
 button:hover {
