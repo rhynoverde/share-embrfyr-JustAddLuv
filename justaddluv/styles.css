@@ -1,0 +1,77 @@
+body {
+    background-color: #f4f4f4;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    width: 100vw; /* Ensure the body spans the entire width of the device */
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure container spans the entire width */
+    width: 100%; /* Fill the available width */
+    box-sizing: border-box; /* Include padding in width calculations */
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    margin-bottom: 20px;
+}
+
+#shared-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Add space below the image */
+}
+
+button {
+    background-color: #822E08; /* Updated button color */
+    color: white;
+    padding: 18px 24px; /* Increased padding for larger button size */
+    font-size: 18px; /* Increased font size */
+    font-weight: bold; /* Bolder text */
+    cursor: pointer;
+    border-radius: 6px; /* Slightly larger border radius */
+    border: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px; /* Add space above the button */
+}
+
+button:hover {
+    background-color: #6d2406; /* Darker shade on hover */
+}
+
+button:active {
+    background-color: #571c05; /* Even darker shade on active state */
+}
