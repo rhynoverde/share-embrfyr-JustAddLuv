@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerksPass Share Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Robeks-style layout */
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 350px; /* Updated width to 350px */
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            text-align: center;
+            max-width: 540px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 5px solid #d9534f; /* Red border to stand out */
+            border-radius: 10px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 540px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .image-container img {
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .image-container img {
+                max-width: 250px;
+            }
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        /* PerksPass button style */
+        .main-button {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            background-color: #d9534f; /* Red for PerksPass */
+            color: white;
+            border: none;
+            border-radius: 30px; /* More rounded edges */
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .main-button:hover {
+            background-color: #c9302c;
+        }
+
+        /* SweetAlert custom styles */
+        .swal2-confirm {
+            background-color: #d9534f !important; /* Red for Share Now button */
+            color: white !important;
+            border-radius: 30px !important; /* More rounded edges */
+            font-size: 20px !important; /* Larger button */
+            padding: 15px 30px !important;
+        }
+
+        .swal2-cancel {
+            background-color: #6c757d !important; /* Smaller, gray instructions button */
+            color: white !important;
+            border-radius: 10px !important;
+            font-size: 14px !important; /* Smaller text */
+            padding: 10px 20px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <!-- Iceberg Drive Inn Logo with updated width -->
+            <img src="https://media.swipepages.com/2024/9/602ae67dc447330010812b55/iceberglogo.png" alt="Iceberg Drive Inn Logo" class="logo">
+            <h1>Your image is ready to share!</h1>
+        </div>
+        <div class="image-container">
+            <!-- Placeholder or image loaded dynamically from query string -->
+            <img id="shared-image" src="https://s3.typebot.io/public/workspaces/cl6blb2a6285809jpzzel4b7q/typebots/clbghkpki000wjs082fs98844/results/hk54w4ejxncepntulfyv93m1/ImageLoading_1080x1080.gif" alt="Image Loading" />
+        </div>
+        <div class="content">
+            <button id="shareButton" class="main-button">Share My Review Image</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const imageUrl = urlParams.get('imageURL');
+
+            // The link to be copied (PerksPass link)
+            const perksPassLink = "https://www.localperks.app/"; // Updated PerksPass app link
+
+            // Set the image source or display a loading message
+            const sharedImage = document.getElementById('shared-image');
+            if (sharedImage) {
+                if (imageUrl) {
+                    sharedImage.src = imageUrl;
+                } else {
+                    sharedImage.alt = "Image Loading. You can tap the share button and share before the sample image loads. No need to wait!";
+                }
+            }
+
+            // Share image and copy text functionality
+            const shareButton = document.getElementById('shareButton');
+            
+            if (shareButton) {
+                shareButton.addEventListener('click', async function() {
+                    try {
+                        // Step 1: Copy the PerksPass link to clipboard
+                        await navigator.clipboard.writeText(perksPassLink);
+                        console.log('Link copied to clipboard:', perksPassLink);
+
+                        // Step 2: Show SweetAlert with new message and button text
+                        Swal.fire({
+                            title: `<strong><img src="https://media.swipepages.com/2024/9/602ae67dc447330010812b55/perkspasslogoredletterstrimmedtranparentbg-300.png" alt="PerksPass App Logo" style="max-width: 150px;" /> App Link Copied!</strong>`,
+                            html: `
+                                <p>Help your friends and family easily get the PerksPass App! We copied the link to the app to your clipboard.</p>
+                                <p>Suggestions:</p>
+                                <ul style="text-align: left;">
+                                    <li>😊 Paste the link on your TikTok.</li>
+                                    <li>😁 Paste the link as a comment on your Facebook post.</li>
+                                    <li>😃 Paste the link as a sticker in your Instagram story.</li>
+                                </ul>
+                                <p>Thanks!</p>
+                            `,
+                            icon: 'success',
+                            confirmButtonText: 'Share Now',
+                            cancelButtonText: 'I would like more detailed instructions on how to share the PerksPass App link',
+                            showCancelButton: true,
+                            customClass: {
+                                confirmButton: 'swal2-confirm',
+                                cancelButton: 'swal2-cancel'
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Step 3: Trigger the Web Share API
+                                if (imageUrl && navigator.share) {
+                                    fetch(imageUrl)
+                                        .then(response => response.blob())
+                                        .then(blob => {
+                                            const fileType = imageUrl.endsWith('.png') ? 'image/png' : 'image/jpeg';
+                                            const file = new File([blob], `image.${fileType.split('/')[1]}`, { type: fileType });
+                                            return navigator.share({
+                                                files: [file] // Only sharing the image, no text
+                                            });
+                                        })
+                                        .then(() => {
+                                            setTimeout(() => {
+                                                // Redirect to the rewards page
+                                                window.location.href = `https://reward.embrfyr.com/perkspassdemo?${urlParams.toString()}`;
+                                            }, 1000);
+                                        })
+                                        .catch(error => console.log('Error sharing image', error));
+                                } else {
+                                    console.log('Web Share API not supported or image URL missing.');
+                                }
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                // Redirect to instructions page
+                                window.location.href = 'https://shareinstructions.embrfyr.com/perkspassdemo';
+                            }
+                        });
+                    } catch (error) {
+                        console.log('Sharing or copying failed', error);
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
